@@ -1,4 +1,4 @@
-# forum-cuisine-jee-oracle
+# Recettopia - FRONTEND ONLY !
 
 ## This application will be around recipes that you can make, publish into the application.
 
