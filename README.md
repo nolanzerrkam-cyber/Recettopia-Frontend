@@ -6,4 +6,4 @@
 ___
 # Developpers working on this project :
 
-Nora Lfarh, Arnaud Jordan, Nolan Mertens
+Nora Lfarh, Arnaud Jordan, Nolan Mertens, Dorian Bottemanne
