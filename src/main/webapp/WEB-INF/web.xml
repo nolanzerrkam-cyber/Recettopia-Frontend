@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Deployment descriptor of Recettopia-Frontend, read by Tomcat at startup.
+    Version 6.1 = Jakarta EE 11 / Servlet 6.1 (Tomcat 11).
+
+    Servlets and filters will be declared here (or with annotations)
+    as the application grows.
+-->
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd"
+         version="6.1">
+
+    <!-- Name of the application shown in Tomcat's manager -->
+    <display-name>Recettopia-Frontend</display-name>
+
+    <!--
+        Base URL of RecettopiaAPI.
+        The frontend NEVER accesses the database: every DAO sends its HTTP requests
+        to this URL. Read it in Java with:
+        getServletContext().getInitParameter("api.base.url")
+        Change it here only if the API runs on another host, port or context path.
+    -->
+    <context-param>
+        <param-name>api.base.url</param-name>
+        <param-value>http://localhost:8080/RecettopiaAPI/api</param-value>
+    </context-param>
+
+    <!-- Page displayed when the user opens the root URL of the application -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

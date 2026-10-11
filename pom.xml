@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Maven configuration of the Recettopia-Frontend project (web client).
+    This project NEVER accesses the database: it only calls RecettopiaAPI
+    over HTTP (java.net.http.HttpClient, included in the JDK).
+    Maven reads this file to:
+      - download the libraries the project needs (dependencies),
+      - compile the code with the right Java version,
+      - package everything into a .war file that Tomcat can deploy.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project identity -->
+    <groupId>be.recettopia</groupId>
+    <artifactId>Recettopia-Frontend</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Recettopia-Frontend</name>
+    <!-- war = web application archive, the format deployed on Tomcat -->
+    <packaging>war</packaging>
+
+    <properties>
+        <!-- All source files are read as UTF-8 (accents in JSP pages and strings) -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Compile for Java 26 (JDK imposed by the assignment) -->
+        <maven.compiler.release>26</maven.compiler.release>
+        <junit.version>6.1.3</junit.version>
+    </properties>
+
+    <dependencies>
+        <!-- Servlet API (servlets, filters, sessions): needed to compile,
+             but Tomcat 11 already provides it at runtime, so it is NOT
+             copied into the war (scope "provided") -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- org.json: JSONObject class, used to read the JSON returned by the API
+             and for the Bean(JSONObject) constructors required by the teacher
+             (same JavaBeans as in RecettopiaAPI) -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+
+        <!-- JUnit: unit tests (only used in src/test, never in the war) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Name of the generated file: Recettopia-Frontend.war
+             (instead of Recettopia-Frontend-1.0-SNAPSHOT.war) -->
+        <finalName>Recettopia-Frontend</finalName>
+        <plugins>
+            <!-- Compiles the Java sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <!-- Packages the application into a .war -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.5.1</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
